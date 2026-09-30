@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <title>FitBuddy | Your Plan</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <main class="card wide">
+        <div class="brand">FITBUDDY</div>
+
+        <h1>Hello, {{ user.username }}!</h1>
+
+        {% if updated %}
+            <div class="success">
+                Your plan has been updated using your feedback.
+            </div>
+        {% else %}
+            <p class="subtitle">
+                Your 7-day movement plan is ready.
+            </p>
+        {% endif %}
+
+        <section class="panel">
+            <h2>Your preferences</h2>
+            <p><strong>User ID:</strong> {{ user.user_id }}</p>
+            <p><strong>Age:</strong> {{ user.age }}</p>
+            <p><strong>Focus:</strong> {{ user.goal }}</p>
+            <p><strong>Effort:</strong> {{ user.intensity }}</p>
+        </section>
+
+        <section class="panel">
+            <h2>7-day movement plan</h2>
+            <pre>{{ plan }}</pre>
+        </section>
+
+        <section class="panel">
+            <h2>Food & recovery note</h2>
+            <p>{{ tip }}</p>
+        </section>
+
+        <section class="panel">
+            <h2>Refine your plan</h2>
+            <p>
+                Tell FitBuddy what you would like
+                to change.
+            </p>
+
+            <form action="/submit-feedback" method="post">
+                <input type="hidden" name="user_id"
+                       value="{{ user.user_id }}">
+
+                <label for="feedback">
+                    Your feedback
+                </label>
+
+                <textarea id="feedback" name="feedback"
+                          minlength="3" maxlength="1000"
+                          required
+                          placeholder="Example: Please add another gentle mobility day."></textarea>
+
+                <button type="submit">
+                    Update my plan
+                </button>
+            </form>
+        </section>
+
+        <p class="safety">
+            General wellbeing information only.
+            Stop activities if you feel unwell,
+            and ask a trusted adult or qualified
+            professional for personal guidance.
+        </p>
+
+        <a href="/">Create another plan</a>
+        &nbsp; | &nbsp;
+        <a href="/view-all-users">Coach dashboard</a>
+    </main>
+</body>
+</html>

@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <title>FitBuddy | Home</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <main class="card">
+        <div class="brand">FITBUDDY</div>
+        <h1>Your wellbeing, your way.</h1>
+        <p class="subtitle">
+            Create a friendly 7-day movement plan
+            that fits your preferences.
+        </p>
+
+        {% if error %}
+            <div class="error">{{ error }}</div>
+        {% endif %}
+
+        <form action="/generate-workout" method="post">
+            <label for="username">Your name</label>
+            <input id="username" name="username"
+                   type="text" maxlength="100" required
+                   placeholder="Enter your name">
+
+            <label for="user_id">User ID</label>
+            <input id="user_id" name="user_id"
+                   type="text" maxlength="80" required
+                   placeholder="Create a unique ID">
+
+            <label for="age">Age</label>
+            <input id="age" name="age"
+                   type="number" min="13" max="100"
+                   required placeholder="Your age">
+
+            <label for="goal">Wellbeing focus</label>
+            <select id="goal" name="goal" required>
+                <option value="general_wellness">
+                    General wellness
+                </option>
+                <option value="strength">
+                    Everyday strength
+                </option>
+                <option value="flexibility">
+                    Flexibility and mobility
+                </option>
+                <option value="energy">
+                    Energy and enjoyable activity
+                </option>
+            </select>
+
+            <label for="intensity">
+                Preferred effort
+            </label>
+            <select id="intensity" name="intensity" required>
+                <option value="low">Easy</option>
+                <option value="medium">Moderate</option>
+                <option value="high">
+                    More active (still comfortable)
+                </option>
+            </select>
+
+            <button type="submit">
+                Generate my 7-day plan
+            </button>
+        </form>
+
+        <p class="safety">
+            Choose activities that feel comfortable.
+            Take breaks and rest when needed.
+            This app provides general ideas, not
+            medical advice.
+        </p>
+
+        <a href="/view-all-users">
+            Open coach dashboard
+        </a>
+    </main>
+</body>
+</html>

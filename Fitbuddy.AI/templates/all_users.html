@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <title>FitBuddy | Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <main class="card wide">
+        <div class="brand">FITBUDDY</div>
+        <h1>Coach dashboard</h1>
+
+        <p class="safety">
+            Local demonstration only. This page
+            has no login or access control.
+            Do not share it publicly.
+        </p>
+
+        {% for user in users %}
+            <section class="panel">
+                <h2>{{ user.username }}</h2>
+
+                <p>
+                    <strong>User ID:</strong>
+                    {{ user.user_id }}
+                </p>
+
+                <p>
+                    <strong>Age:</strong> {{ user.age }}
+                    &nbsp; | &nbsp;
+                    <strong>Focus:</strong> {{ user.goal }}
+                    &nbsp; | &nbsp;
+                    <strong>Effort:</strong> {{ user.intensity }}
+                </p>
+
+                <h3>Original plan</h3>
+                <pre>{{ user.original_plan }}</pre>
+
+                {% if user.updated_plan %}
+                    <h3>Updated plan</h3>
+                    <pre>{{ user.updated_plan }}</pre>
+
+                    <h3>Feedback submitted</h3>
+                    <p>{{ user.feedback }}</p>
+                {% endif %}
+
+                <h3>Food & recovery note</h3>
+                <p>{{ user.nutrition_tip }}</p>
+            </section>
+        {% else %}
+            <p>No users have registered yet.</p>
+        {% endfor %}
+
+        <a href="/">Back to homepage</a>
+    </main>
+</body>
+</html>
